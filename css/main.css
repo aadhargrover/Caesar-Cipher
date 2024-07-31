@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, #7f0000, #990000);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffcccc;
+    margin-bottom: 20px;
+    background-color: rgba(153, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container h1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+#app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background: #333333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#app-container textarea {
+    height: 200px;
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    resize: none;
+    overflow: hidden;
+    background-color: #262626;
+    color: #ffffff;
+}
+
+#buttons-container {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+}
+
+#buttons-container button,
+#buttons-container input {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #990000, #cc0000);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#buttons-container button:hover,
+#buttons-container input:hover {
+    background: linear-gradient(135deg, #cc0000, #ff3333);
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+#result {
+    margin-top: 20px;
+    color: #ffcccc;
+}
+
+#result h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+#result p {
+    font-size: 1.2rem;
+}

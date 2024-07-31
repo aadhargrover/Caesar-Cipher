@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAESAR CIPHER</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CAESAR CIPHER APP</h1>
+        <div id="app-container">
+            <textarea id="text" placeholder="Enter text here..."></textarea>
+            <div id="buttons-container">
+                <button id="encrypt">ENCRYPT</button>
+                <input id="key" type="text" placeholder="Key">
+                <button id="decrypt">DECRYPT</button>
+                <button id="reset">RESET</button>
+            </div>
+            <div id="result">
+                <h2>Result:</h2>
+                <p id="result-text"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btnEncrypt = document.querySelector('#encrypt');
+        const btnDecrypt = document.querySelector('#decrypt');
+        const btnReset = document.querySelector('#reset');
+        const key = document.querySelector('#key');
+        const textarea = document.querySelector('#text');
+        const resultText = document.querySelector('#result-text');
+
+        const listLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+        function caesarCipher(text, keyValue, encrypt = true) {
+            let newText = '';
+            for (let letter of text) {
+                letter = letter.toLowerCase();
+                if (!listLetters.includes(letter)) {
+                    newText += letter;
+                    continue;
+                }
+                let indexLetter = listLetters.findIndex(item => item === letter);
+                let indexNewLetter = encrypt ? indexLetter + keyValue : indexLetter - keyValue;
+                if (indexNewLetter > 25) indexNewLetter -= 26;
+                if (indexNewLetter < 0) indexNewLetter += 26;
+                newText += listLetters[indexNewLetter];
+            }
+            return newText;
+        }
+
+        btnEncrypt.addEventListener('click', () => {
+            const keyValue = Number(key.value);
+            resultText.textContent = caesarCipher(textarea.value, keyValue, true);
+        });
+
+        btnDecrypt.addEventListener('click', () => {
+            const keyValue = Number(key.value);
+            resultText.textContent = caesarCipher(textarea.value, keyValue, false);
+        });
+
+        btnReset.addEventListener('click', () => {
+            textarea.value = '';
+            key.value = '';
+            resultText.textContent = '';
+        });
+    </script>
+</body>
+</html>
