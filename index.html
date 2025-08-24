@@ -1,71 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAESAR CIPHER</title>
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>Cyber Security Tools Hub</title>
+
+  <!-- Fonts for futuristic + bold look -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Theme styles (purple/black neon) -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>CAESAR CIPHER APP</h1>
-        <div id="app-container">
-            <textarea id="text" placeholder="Enter text here..."></textarea>
-            <div id="buttons-container">
-                <button id="encrypt">ENCRYPT</button>
-                <input id="key" type="text" placeholder="Key">
-                <button id="decrypt">DECRYPT</button>
-                <button id="reset">RESET</button>
-            </div>
-            <div id="result">
-                <h2>Result:</h2>
-                <p id="result-text"></p>
-            </div>
-        </div>
+  <!-- ===== NAVBAR ===== -->
+  <header>
+    <nav class="navbar" aria-label="Primary">
+      <div class="logo">CYBER<span>TOOLS</span></div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+        ☰
+      </button>
+      <ul id="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#learn">Learn</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero" aria-label="Hero">
+    <div class="hero-content">
+      <h1>Cyber Security Tools Hub</h1>
+      <p>Explore classic cryptography to learn the basics of secure communication and how early ciphers built the foundation for modern encryption methods.</p>
+      <a href="#tools" class="cta-btn">Launch Tools</a>
     </div>
-    <script>
-        const btnEncrypt = document.querySelector('#encrypt');
-        const btnDecrypt = document.querySelector('#decrypt');
-        const btnReset = document.querySelector('#reset');
-        const key = document.querySelector('#key');
-        const textarea = document.querySelector('#text');
-        const resultText = document.querySelector('#result-text');
+    <!-- Optional overlay gradient handled in CSS -->
+  </section>
 
-        const listLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="about" aria-label="About Cybersecurity">
+    <div class="about-text">
+      <h2>What Are Ciphers?</h2>
+      <p>
+        Ciphers are methods to transform readable text (plaintext) into an unreadable format (ciphertext)
+        using rules or keys. They protect confidentiality and lay the foundations for modern cryptography.
+      </p>
+      <p>
+        On this site you’ll find interactive tools and concise explanations for several classic ciphers.
+        They’re great for learning how substitution and transposition work before diving into modern crypto.
+      </p>
+      <a href="#learn" class="cta-link">Learn the concepts ↓</a>
+    </div>
+    <figure class="about-media">
+      <img src="D:\Caesar Cipher\images\6.jpg" alt="Abstract cybersecurity illustration" />
+    </figure>
+  </section>
 
-        function caesarCipher(text, keyValue, encrypt = true) {
-            let newText = '';
-            for (let letter of text) {
-                letter = letter.toLowerCase();
-                if (!listLetters.includes(letter)) {
-                    newText += letter;
-                    continue;
-                }
-                let indexLetter = listLetters.findIndex(item => item === letter);
-                let indexNewLetter = encrypt ? indexLetter + keyValue : indexLetter - keyValue;
-                if (indexNewLetter > 25) indexNewLetter -= 26;
-                if (indexNewLetter < 0) indexNewLetter += 26;
-                newText += listLetters[indexNewLetter];
-            }
-            return newText;
-        }
+  <!-- ===== TOOLS ===== -->
+  <section id="tools" class="tools" aria-label="Cipher Tools">
+    <h2>Encryption Tools</h2>
 
-        btnEncrypt.addEventListener('click', () => {
-            const keyValue = Number(key.value);
-            resultText.textContent = caesarCipher(textarea.value, keyValue, true);
-        });
+    <!-- Tabs -->
+    <div class="tool-tabs" role="tablist" aria-label="Cipher tabs">
+      <button role="tab" aria-selected="true" aria-controls="panel-caesar" id="tab-caesar" data-tool="caesar">Caesar</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-playfair" id="tab-playfair" data-tool="playfair">Playfair</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-vigenere" id="tab-vigenere" data-tool="vigenere">Vigenère</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-pigpen" id="tab-pigpen" data-tool="pigpen">Pigpen</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-atbash" id="tab-atbash" data-tool="atbash">Atbash</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-rot13" id="tab-rot13" data-tool="rot13">ROT13</button>
+    </div>
 
-        btnDecrypt.addEventListener('click', () => {
-            const keyValue = Number(key.value);
-            resultText.textContent = caesarCipher(textarea.value, keyValue, false);
-        });
+    <!-- Panels -->
+    <div id="cipher-panels">
+      <!-- CAESAR -->
+      <section
+        class="tool-panel active"
+        id="panel-caesar"
+        role="tabpanel"
+        aria-labelledby="tab-caesar"
+      >
+        <div class="panel-head">
+          <h3>Caesar Cipher</h3>
+          <p>Each letter is moved by a set number of positions (the key). A basic form of substitution cipher.</p>
+        </div>
 
-        btnReset.addEventListener('click', () => {
-            textarea.value = '';
-            key.value = '';
-            resultText.textContent = '';
-        });
-    </script>
+        <div class="panel-grid">
+          <div class="panel-form">
+            <label for="caesar-input" class="sr-only">Caesar input</label>
+            <textarea id="caesar-input" placeholder="Enter text..."></textarea>
+
+            <div class="panel-controls">
+              <input id="caesar-key" type="number" min="0" max="25" placeholder="Key (0–25)" aria-label="Caesar key" />
+              <button id="caesar-encrypt">Encrypt</button>
+              <button id="caesar-decrypt">Decrypt</button>
+              <button class="ghost" id="caesar-reset">Reset</button>
+            </div>
+
+            <div class="result">
+              <h4>Result</h4>
+              <pre id="caesar-result" class="result-box"></pre>
+            </div>
+          </div>
+
+          <figure class="panel-visual">
+            <img src="D:\Caesar Cipher\images\Fun-with-Caesar-Shift-Cipher_Page_5.png" alt="Cipher concept visual" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- PLAYFAIR -->
+      <section
+        class="tool-panel"
+        id="panel-playfair"
+        role="tabpanel"
+        aria-labelledby="tab-playfair"
+        hidden
+      >
+        <div class="panel-head">
+          <h3>Playfair Cipher</h3>
+          <p>Uses digraph substitution with a 5×5 key square, encrypting pairs of letters based on row, column, and rectangle rules.</p>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel-form">
+            <input id="playfair-key" type="text" placeholder="Keyword (e.g., MONARCHY)" aria-label="Playfair keyword" />
+            <label for="playfair-input" class="sr-only">Playfair input</label>
+            <textarea id="playfair-input" placeholder="Enter text..."></textarea>
+
+            <div class="panel-controls">
+              <button id="playfair-encrypt">Encrypt</button>
+              <button id="playfair-decrypt">Decrypt</button>
+              <button class="ghost" id="playfair-reset">Reset</button>
+            </div>
+
+            <div class="result">
+              <h4>Result</h4>
+              <pre id="playfair-result" class="result-box"></pre>
+            </div>
+          </div>
+
+          <figure class="panel-visual">
+            <img src="D:\Caesar Cipher\images\encodemsg1.png" alt="Playfair visual" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- VIGENERE -->
+      <section
+        class="tool-panel"
+        id="panel-vigenere"
+        role="tabpanel"
+        aria-labelledby="tab-vigenere"
+        hidden
+      >
+        <div class="panel-head">
+          <h3>Vigenère Cipher</h3>
+          <p>Polyalphabetic substitution using a repeated keyword to vary the shift of each letter.</p>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel-form">
+            <input id="vigenere-key" type="text" placeholder="Keyword (e.g., LEMON)" aria-label="Vigenère keyword" />
+            <label for="vigenere-input" class="sr-only">Vigenère input</label>
+            <textarea id="vigenere-input" placeholder="Enter text..."></textarea>
+
+            <div class="panel-controls">
+              <button id="vigenere-encrypt">Encrypt</button>
+              <button id="vigenere-decrypt">Decrypt</button>
+              <button class="ghost" id="vigenere-reset">Reset</button>
+            </div>
+
+            <div class="result">
+              <h4>Result</h4>
+              <pre id="vigenere-result" class="result-box"></pre>
+            </div>
+          </div>
+
+          <figure class="panel-visual">
+            <img src="D:\Caesar Cipher\images\vigenere_decrypt.png" alt="Vigenère tableau visual" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- PIGPEN -->
+      <section
+        class="tool-panel"
+        id="panel-pigpen"
+        role="tabpanel"
+        aria-labelledby="tab-pigpen"
+        hidden
+      >
+        <div class="panel-head">
+          <h3>Pigpen Cipher</h3>
+          <p>Pictographic substitution using symbols for letters. Often mapped to grids and X-shapes.</p>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel-form">
+            <label for="pigpen-input" class="sr-only">Pigpen input</label>
+            <textarea id="pigpen-input" placeholder="Enter text (A–Z, spaces)..."></textarea>
+
+            <div class="panel-controls">
+              <button id="pigpen-encode">Encode</button>
+              <button id="pigpen-decode">Decode</button>
+              <button class="ghost" id="pigpen-reset">Reset</button>
+            </div>
+
+            <div class="result">
+              <h4>Result</h4>
+              <pre id="pigpen-result" class="result-box"></pre>
+            </div>
+          </div>
+
+          <figure class="panel-visual">
+            <img src="D:\Caesar Cipher\images\pigpen.jpg" alt="Pigpen symbol chart placeholder" />
+          
+          </figure>
+        </div>
+      </section>
+
+      <!-- ATBASH -->
+      <section
+        class="tool-panel"
+        id="panel-atbash"
+        role="tabpanel"
+        aria-labelledby="tab-atbash"
+        hidden
+      >
+        <div class="panel-head">
+          <h3>Atbash Cipher</h3>
+          <p>Monoalphabetic substitution that mirrors the alphabet (A↔Z, B↔Y, …).</p>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel-form">
+            <label for="atbash-input" class="sr-only">Atbash input</label>
+            <textarea id="atbash-input" placeholder="Enter text..."></textarea>
+
+            <div class="panel-controls">
+              <button id="atbash-run">Transform</button>
+              <button class="ghost" id="atbash-reset">Reset</button>
+            </div>
+
+            <div class="result">
+              <h4>Result</h4>
+              <pre id="atbash-result" class="result-box"></pre>
+            </div>
+          </div>
+
+          <figure class="panel-visual">
+            <img src="D:\Caesar Cipher\images\images.png" alt="Atbash visual" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ROT13 -->
+      <section
+        class="tool-panel"
+        id="panel-rot13"
+        role="tabpanel"
+        aria-labelledby="tab-rot13"
+        hidden
+      >
+        <div class="panel-head">
+          <h3>ROT13</h3>
+          <p>Rotation by 13 places. A special case of Caesar that is its own inverse.</p>
+        </div>
+
+        <div class="panel-grid">
+          <div class="panel-form">
+            <label for="rot13-input" class="sr-only">ROT13 input</label>
+            <textarea id="rot13-input" placeholder="Enter text..."></textarea>
+
+            <div class="panel-controls">
+              <button id="rot13-run">Transform</button>
+              <button class="ghost" id="rot13-reset">Reset</button>
+            </div>
+
+            <div class="result">
+              <h4>Result</h4>
+              <pre id="rot13-result" class="result-box"></pre>
+            </div>
+          </div>
+
+          <figure class="panel-visual">
+            <img src="D:\Caesar Cipher\images\0_m3VShx1oxynBnACy.jpg" alt="ROT13 visual" />
+            
+          </figure>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ===== LEARN ===== -->
+  <section id="learn" class="learn" aria-label="Learn more">
+    <h2>How These Ciphers Work</h2>
+    <div class="learn-grid">
+      <article class="learn-card">
+        <h3>Caesar Cipher</h3>
+        <p>
+         The Caesar cipher is an ancient substitution cipher that shifts each letter of the alphabet by a fixed number of positions. It was widely used in Roman times for secret messages, but due to its simplicity, it is highly vulnerable to modern cryptanalysis.
+        </p>
+      </article>
+      <article class="learn-card">
+        <h3>Playfair cipher</h3>
+        <p>
+          The Playfair cipher is a digraph substitution method that encrypts letter pairs using a 5×5 key square. It replaces pairs based on rules for rows, columns, and rectangles, making it stronger than simple monoalphabetic ciphers but still vulnerable to frequency analysis.
+        </p>
+      </article>
+      <article class="learn-card">
+        <h3>Vigenère cipher</h3>
+        <p>
+          The Vigenère cipher is a polyalphabetic substitution method that uses a repeating keyword to shift letters by varying amounts. This makes patterns less obvious than in simple ciphers like Caesar, giving it more security, though it can still be cracked with frequency analysis.
+        </p>
+      </article>
+
+      <article class="learn-card">
+        <h3>Pigpen Cipher</h3>
+        <p>
+        The Pigpen cipher is a geometric substitution cipher that replaces letters with symbols derived from grids or shapes. Popular with secret societies like the Freemasons, it looks mysterious but offers little real security since the symbols can be memorized and cracked easily.        
+        </p>
+      </article>
+
+      <article class="learn-card">
+        <h3>Atbash cipher</h3>
+        <p>
+          The Atbash cipher is a simple monoalphabetic substitution method where each letter is replaced by its opposite in the alphabet, such as A becoming Z and B becoming Y. Though historically significant, it provides no real security since the pattern is fixed and easy to decode.
+        </p>
+      </article>
+
+      <article class="learn-card">
+        <h3>ROT13 cipher</h3>
+        <p>
+          The ROT13 cipher is a simple substitution method that shifts each letter 13 places in the alphabet. Because applying it twice returns the original text, it is often used for obfuscation rather than true encryption, providing no real cryptographic security.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2025 Cyber Tools Hub • Learn & Experiment with Classic Ciphers</p>
+  </footer>
+
+  <!-- App logic (tab switching + cipher algorithms) -->
+  <script src="app.js"></script>
 </body>
 </html>
